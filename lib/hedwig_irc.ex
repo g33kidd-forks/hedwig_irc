@@ -62,7 +62,7 @@ defmodule Hedwig.Adapters.IRC do
         user: user,
         type: "groupchat"
       }
-    Hedwig.Robot.handle_message(robot, incoming_message)
+    Hedwig.Robot.handle_in(robot, incoming_message)
 
     {:noreply, state}
   end
@@ -75,7 +75,7 @@ defmodule Hedwig.Adapters.IRC do
         user: user,
         type: "groupchat"
       }
-    Hedwig.Robot.handle_message(robot, incoming_message)
+    Hedwig.Robot.handle_in(robot, incoming_message)
 
     {:noreply, state}
   end
