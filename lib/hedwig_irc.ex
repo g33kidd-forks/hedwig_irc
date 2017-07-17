@@ -79,6 +79,19 @@ defmodule Hedwig.Adapters.IRC do
 
     {:noreply, state}
   end
+  def handle_info({:mentioned, msg, user, channel}, state = {robot, _opts, _client}) when is_binary(user) do
+    incoming_message =
+      %Hedwig.Message{
+        ref: make_ref(),
+        room: channel,
+        text: msg,
+        user: user,
+        type: "groupchat"
+      }
+    Hedwig.Robot.handle_in(robot, incoming_message)
+
+    {:noreply, state}
+  end
 
   def handle_info({:quit, message, %{nick: user}}, state) do
     Logger.info "#{user} left with message: #{inspect message}"
